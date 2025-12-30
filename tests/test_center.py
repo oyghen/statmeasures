@@ -28,6 +28,10 @@ class TestMeasuresOfCentralTendency:
         result = sm.center.dwe(data)
         npt.assert_almost_equal(result, 6.72, decimal=2)
 
+    def test_spwe(self, data: np.array):
+        result = sm.center.spwe(data)
+        npt.assert_almost_equal(result, 6.01, decimal=2)
+
     @pytest.fixture
     def data(self) -> np.array:
         return np.array([1, 3, 4, 4, 5, 7, 7, 7, 9, 100])
