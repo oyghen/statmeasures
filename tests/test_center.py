@@ -10,6 +10,10 @@ class TestMeasuresOfCentralTendency:
         result = sm.center.harmonic_mean(data)
         npt.assert_almost_equal(result, 3.87, decimal=2)
 
+    def test_geometric_mean(self, data: np.array):
+        result = sm.center.geometric_mean(data)
+        npt.assert_almost_equal(result, 6.12, decimal=2)
+
     def test_trimmed_mean(self, data: np.array):
         """Test the 20% trimmed mean."""
         result = sm.center.trimmed_mean(data, alpha=0.2)
