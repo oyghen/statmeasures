@@ -6,6 +6,10 @@ import statmeasures as sm
 
 
 class TestMeasuresOfCentralTendency:
+    def test_harmonic_mean(self, data: np.array):
+        result = sm.center.harmonic_mean(data)
+        npt.assert_almost_equal(result, 3.87, decimal=2)
+
     def test_trimmed_mean(self, data: np.array):
         """Test the 20% trimmed mean."""
         alpha = 0.2

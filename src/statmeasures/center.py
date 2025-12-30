@@ -1,9 +1,14 @@
 """Measures of central tendency."""
 
-__all__ = ("trimmed_mean", "winsorized_mean")
+__all__ = ("harmonic_mean", "trimmed_mean", "winsorized_mean")
 
 import numpy as np
 from scipy.stats import mstats
+
+
+def harmonic_mean(data: np.ndarray) -> float:
+    """Return the harmonic mean."""
+    return mstats.hmean(data)
 
 
 def trimmed_mean(
