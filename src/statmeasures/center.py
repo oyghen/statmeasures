@@ -11,18 +11,12 @@ def harmonic_mean(data: np.ndarray) -> float:
     return mstats.hmean(data)
 
 
-def trimmed_mean(
-    data: np.ndarray,
-    limits: tuple[float, float] = (0.05, 0.05),
-) -> float:
+def trimmed_mean(data: np.ndarray, alpha: float) -> float:
     """Return the trimmed mean."""
-    return mstats.trimmed_mean(data, limits=limits)
+    return mstats.trimmed_mean(data, limits=(alpha, alpha))
 
 
-def winsorized_mean(
-    data: np.ndarray,
-    limits: tuple[float, float] = (0.05, 0.05),
-) -> float:
+def winsorized_mean(data: np.ndarray, alpha: float) -> float:
     """Return the winsorized mean."""
-    winsorized_data = mstats.winsorize(data, limits=limits)
+    winsorized_data = mstats.winsorize(data, limits=(alpha, alpha))
     return winsorized_data.mean()
