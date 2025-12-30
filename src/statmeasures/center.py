@@ -1,6 +1,6 @@
 """Measures of central tendency."""
 
-__all__ = ("harmonic_mean", "geometric_mean", "trimmed_mean", "winsorized_mean")
+__all__ = ("harmonic_mean", "geometric_mean", "trimmed_mean", "winsorized_mean", "dwe")
 
 import numpy as np
 from scipy.stats import mstats
@@ -25,3 +25,10 @@ def winsorized_mean(data: np.ndarray, alpha: float) -> float:
     """Return the winsorized mean."""
     winsorized_data = mstats.winsorize(data, limits=(alpha, alpha))
     return winsorized_data.mean()
+
+
+def dwe(data: np.ndarray) -> float:
+    """Return the distance-weighted estimator."""
+    distances = np.abs(np.subtract.outer(data, data, dtype=np.float64))
+    weights = (len(data) - 1) / distances.sum(axis=1)
+    return (weights * data).sum() / weights.sum()
