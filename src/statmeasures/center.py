@@ -36,7 +36,7 @@ def winsorized_mean(data: np.ndarray, alpha: float) -> float:
 
 def dwe(data: np.ndarray) -> float:
     """Return the distance-weighted estimator."""
-    distances = np.abs(np.subtract.outer(data, data, dtype=np.float64))
+    distances = np.abs(np.subtract.outer(data, data, dtype=float))
     weights = (len(data) - 1) / distances.sum(axis=1)
     return (weights * data).sum() / weights.sum()
 
