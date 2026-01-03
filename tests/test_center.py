@@ -3,35 +3,36 @@ import numpy.testing as npt
 import pytest
 
 import statmeasures as sm
+from statmeasures.utils import Vector
 
 
 class TestMeasuresOfCentralTendency:
-    def test_harmonic_mean(self, data: np.array):
-        result = sm.center.harmonic_mean(data)
+    def test_harmonic_mean(self, vec: Vector):
+        result = sm.center.harmonic_mean(vec)
         npt.assert_almost_equal(result, 3.87, decimal=2)
 
-    def test_geometric_mean(self, data: np.array):
-        result = sm.center.geometric_mean(data)
+    def test_geometric_mean(self, vec: Vector):
+        result = sm.center.geometric_mean(vec)
         npt.assert_almost_equal(result, 6.12, decimal=2)
 
-    def test_trimmed_mean(self, data: np.array):
+    def test_trimmed_mean(self, vec: Vector):
         """Test the 20% trimmed mean."""
-        result = sm.center.trimmed_mean(data, alpha=0.2)
+        result = sm.center.trimmed_mean(vec, alpha=0.2)
         npt.assert_almost_equal(result, 5.67, decimal=2)
 
-    def test_winsorized_mean(self, data: np.array):
+    def test_winsorized_mean(self, vec: Vector):
         """Test the 20% winsorized mean."""
-        result = sm.center.winsorized_mean(data, alpha=0.2)
+        result = sm.center.winsorized_mean(vec, alpha=0.2)
         npt.assert_almost_equal(result, 5.6)
 
-    def test_dwe(self, data: np.array):
-        result = sm.center.dwe(data)
+    def test_dwe(self, vec: Vector):
+        result = sm.center.dwe(vec)
         npt.assert_almost_equal(result, 6.72, decimal=2)
 
-    def test_spwe(self, data: np.array):
-        result = sm.center.spwe(data)
+    def test_spwe(self, vec: Vector):
+        result = sm.center.spwe(vec)
         npt.assert_almost_equal(result, 6.01, decimal=2)
 
     @pytest.fixture
-    def data(self) -> np.array:
+    def vec(self) -> Vector:
         return np.array([1, 3, 4, 4, 5, 7, 7, 7, 9, 100])
