@@ -1,6 +1,5 @@
-"""Measures of central tendency."""
-
 __all__ = (
+    "MeasureOfCentralTendency",
     "harmonic_mean",
     "geometric_mean",
     "trimmed_mean",
@@ -9,11 +8,18 @@ __all__ = (
     "spwe",
 )
 
+from typing import Protocol
 
 import numpy as np
 from scipy.stats import mstats
 
 from statmeasures.utils import Vector, ensure_1d
+
+
+class MeasureOfCentralTendency(Protocol):
+    """Return a measure of central tendency for a numeric vector with shape (n,)."""
+
+    def __call__(self, vec: Vector, /, *args, **kwargs) -> float: ...
 
 
 def harmonic_mean(vec: Vector, /, *, validate: bool = False) -> float:

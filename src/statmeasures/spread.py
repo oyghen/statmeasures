@@ -1,10 +1,19 @@
-"""Measures of dispersion."""
+__all__ = (
+    "MeasureOfDispersion",
+    "stderr",
+)
 
-__all__ = ("stderr",)
+from typing import Protocol
 
 import numpy as np
 
 from statmeasures.utils import Vector, ensure_1d
+
+
+class MeasureOfDispersion(Protocol):
+    """Return a measure of dispersion for a numeric vector with shape (n,)."""
+
+    def __call__(self, vec: Vector, /, *args, **kwargs) -> float: ...
 
 
 def stderr(vec: Vector, /, *, validate: bool = False) -> float:
