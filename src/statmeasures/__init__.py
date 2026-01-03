@@ -1,7 +1,7 @@
-__all__ = ["__version__", "center", "spread"]
+__all__ = ["__version__", "center", "spread", "utils"]
 
 from importlib import metadata
 
-from statmeasures import center, spread
+from statmeasures import center, spread, utils
 
 __version__ = metadata.version(__name__)
