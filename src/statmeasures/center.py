@@ -9,45 +9,60 @@ __all__ = (
     "spwe",
 )
 
+
 import numpy as np
 from scipy.stats import mstats
 
+from statmeasures.utils import Vector, ensure_1d
 
-def harmonic_mean(data: np.ndarray) -> float:
+
+def harmonic_mean(vec: Vector, /, *, validate: bool = False) -> float:
     """Return the harmonic mean."""
-    return mstats.hmean(data)
+    v = ensure_1d(vec) if validate else vec
+    res = mstats.hmean(v)
+    return float(res)
 
 
-def geometric_mean(data: np.ndarray) -> float:
+def geometric_mean(vec: Vector, /, *, validate: bool = False) -> float:
     """Return the geometric mean."""
-    return mstats.gmean(data)
+    v = ensure_1d(vec) if validate else vec
+    res = mstats.gmean(v)
+    return float(res)
 
 
-def trimmed_mean(data: np.ndarray, alpha: float) -> float:
+def trimmed_mean(vec: Vector, /, *, alpha: float, validate: bool = False) -> float:
     """Return the trimmed mean."""
-    return mstats.trimmed_mean(data, limits=(alpha, alpha))
+    v = ensure_1d(vec) if validate else vec
+    res = mstats.trimmed_mean(v, limits=(alpha, alpha))
+    return float(res)
 
 
-def winsorized_mean(data: np.ndarray, alpha: float) -> float:
+def winsorized_mean(vec: Vector, /, *, alpha: float, validate: bool = False) -> float:
     """Return the winsorized mean."""
-    winsorized_data = mstats.winsorize(data, limits=(alpha, alpha))
-    return winsorized_data.mean()
+    v = ensure_1d(vec) if validate else vec
+    winsorized_data = mstats.winsorize(v, limits=(alpha, alpha))
+    res = winsorized_data.mean()
+    return float(res)
 
 
-def dwe(data: np.ndarray) -> float:
+def dwe(vec: Vector, /, *, validate: bool = False) -> float:
     """Return the distance-weighted estimator."""
-    distances = np.abs(np.subtract.outer(data, data, dtype=float))
-    weights = (len(data) - 1) / distances.sum(axis=1)
-    return (weights * data).sum() / weights.sum()
+    v = ensure_1d(vec) if validate else vec
+    distances = np.abs(np.subtract.outer(v, v, dtype=float))
+    weights = (len(v) - 1) / distances.sum(axis=1)
+    res = (weights * v).sum() / weights.sum()
+    return float(res)
 
 
-def spwe(data: np.ndarray) -> float:
+def spwe(vec: Vector, /, *, validate: bool = False) -> float:
     """Return the scalar-product weighted estimator."""
-    a = np.pi / 2 * (data - data.min()) / (data.max() - data.min())
+    v = ensure_1d(vec) if validate else vec
+    a = np.pi / 2 * (v - v.min()) / (v.max() - v.min())
     w = np.abs(np.cos(np.subtract.outer(a, a)))
-    x = np.add.outer(data, data) / 2.0
+    x = np.add.outer(v, v) / 2.0
 
     np.fill_diagonal(w, 0.0)
     np.fill_diagonal(x, 0.0)
 
-    return (w * x).sum() / w.sum()
+    res = (w * x).sum() / w.sum()
+    return float(res)
