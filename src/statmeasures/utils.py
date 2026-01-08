@@ -5,15 +5,13 @@ Vector = NDArray[np.floating]
 
 
 def ensure_1d(
-    x: ArrayLike,
-    /,
-    *,
+    a: ArrayLike,
     dtype: np.dtype | type = float,
     finite: bool = True,
 ) -> Vector:
     """Return a strict 1-D NumPy array with shape (n,)."""
     try:
-        arr = np.asarray(x, dtype=dtype)
+        arr = np.asarray(a, dtype=dtype)
     except Exception as exc:
         raise TypeError("input must be array-like") from exc
 

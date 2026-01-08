@@ -18,13 +18,11 @@ class MeasureSummary:
 
     def __init__(
         self,
-        x: ArrayLike,
-        /,
-        *,
+        a: ArrayLike,
         dtype: np.dtype | type = float,
         finite: bool = True,
     ) -> None:
-        v: Vector = ensure_1d(x, dtype=dtype, finite=finite)
+        v: Vector = ensure_1d(a, dtype=dtype, finite=finite)
         object.__setattr__(self, "vec", v)
 
     def mean(self) -> float:

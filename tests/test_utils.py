@@ -14,7 +14,7 @@ ContextManager: TypeAlias = (
 
 class TestEnsure1D:
     @pytest.mark.parametrize(
-        "x",
+        "a",
         [
             [1, 2, 3],
             np.array([1, 2, 3]),
@@ -30,13 +30,13 @@ class TestEnsure1D:
             "(1, 1) -> (1,)",
         ],
     )
-    def test_normalizes_vector_shapes(self, x: ArrayLike):
-        v = sm.utils.ensure_1d(x)
+    def test_normalizes_vector_shapes(self, a: ArrayLike):
+        v = sm.utils.ensure_1d(a)
         assert isinstance(v, np.ndarray)
         assert v.ndim == 1
 
         # value-preserving normalization
-        expected = np.asarray(x).reshape(-1)
+        expected = np.asarray(a).reshape(-1)
         assert np.array_equal(v, expected)
 
         # default dtype is floating
@@ -86,7 +86,3 @@ class TestEnsure1D:
     def test_dtype_respected_when_passed(self):
         v = sm.utils.ensure_1d([1, 2, 3], dtype=np.int64)
         assert v.dtype == np.int64
-
-    def test_positional_only_argument(self):
-        with pytest.raises(TypeError):
-            sm.utils.ensure_1d(x=[1, 2, 3])
