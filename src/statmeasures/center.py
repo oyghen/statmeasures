@@ -63,8 +63,8 @@ def dwe(vec: Vector, /, *, validate: bool = False) -> float:
 def spwe(vec: Vector, /, *, validate: bool = False) -> float:
     """Return the scalar-product weighted estimator."""
     v = ensure_1d(vec) if validate else vec
-    a = np.pi / 2 * (v - v.min()) / (v.max() - v.min())
-    w = np.abs(np.cos(np.subtract.outer(a, a)))
+    e = np.pi / 2 * (v - v.min()) / (v.max() - v.min())
+    w = np.abs(np.cos(np.subtract.outer(e, e)))
     x = np.add.outer(v, v) / 2.0
 
     np.fill_diagonal(w, 0.0)
