@@ -17,12 +17,13 @@ class TestMeasureSummary:
         npt.assert_almost_equal(result.winsorized_mean(alpha=0.2), 5.6)
         npt.assert_almost_equal(result.dwe(), 6.72, decimal=2)
         npt.assert_almost_equal(result.spwe(), 6.01, decimal=2)
+        npt.assert_almost_equal(result.stddev(), 30.06, decimal=2)
         npt.assert_almost_equal(result.stderr(), 9.51, decimal=2)
 
     def test_summary_method(self, vec: Vector):
         result = sm.MeasureSummary(vec).summary()
         assert isinstance(result, dict)
-        assert len(result) == 9
+        assert len(result) == 10
 
     @pytest.fixture
     def vec(self) -> Vector:

@@ -57,6 +57,10 @@ class MeasureSummary:
         """Return the scalar-product weighted estimator."""
         return sm.center.spwe(self.vec)
 
+    def stddev(self) -> float:
+        """Return the sample standard deviation."""
+        return float(np.std(self.vec, ddof=1))
+
     def stderr(self) -> float:
         """Return the standard error."""
         return sm.spread.stderr(self.vec)
@@ -72,5 +76,6 @@ class MeasureSummary:
             "winsorized_mean": self.winsorized_mean(alpha),
             "dwe": self.dwe(),
             "spwe": self.spwe(),
+            "stddev": self.stddev(),
             "stderr": self.stderr(),
         }
