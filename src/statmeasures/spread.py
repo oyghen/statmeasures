@@ -1,7 +1,4 @@
-__all__ = (
-    "MeasureOfDispersion",
-    "stderr",
-)
+__all__ = ("MeasureOfDispersion", "stderr")
 
 from typing import Protocol
 
