@@ -366,7 +366,7 @@ wheels = [
 
 [[package]]
 name = "statmeasures"
-version = "0.1.0rc3"
+version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "scipy" },
