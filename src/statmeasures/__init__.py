@@ -1,4 +1,4 @@
-__all__ = ["__version__", "MeasureSummary", "center", "spread", "utils"]
+__all__ = ("__version__", "MeasureSummary", "center", "spread", "utils")
 
 from importlib import metadata
 

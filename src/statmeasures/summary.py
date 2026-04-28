@@ -1,4 +1,4 @@
-__all__ = ("MeasureSummary",)
+__all__ = ["MeasureSummary"]
 
 
 from dataclasses import dataclass
