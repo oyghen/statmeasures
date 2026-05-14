@@ -1,13 +1,13 @@
 import statmeasures
 
 
-def main():
+def main() -> None:
     result = statmeasures.__name__
     expected = "statmeasures"
     if result == expected:
-        print("smoke test passed")
+        print(f"Smoke test for {statmeasures.__name__}: PASSED")
     else:
-        raise RuntimeError("smoke test failed")
+        raise RuntimeError(f"Smoke test for {statmeasures.__name__}: FAILED")
 
 
 if __name__ == "__main__":
